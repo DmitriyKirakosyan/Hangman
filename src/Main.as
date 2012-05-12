@@ -13,6 +13,8 @@ import game.GameController;
 
 [SWF(width=310, height=450, frameRate=40)]
 public class Main extends Sprite{
+	public static const WIDTH:int = 310;
+	public static const HEIGHT:int = 450;
 	public function Main() {
 		new GameController(this);
 	}
