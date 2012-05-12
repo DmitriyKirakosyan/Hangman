@@ -37,6 +37,7 @@ public class GameController {
 	private var _keyboard:VirtualKeyboard;
 	private var _gameWordController:GameWordController;
 	private var _endTextField:TextField;
+	private var _statistic:GameStatistic;
 
 	[Embed(source="../materials/images/bg.jpg")] private static const BG:Class;
 	[Embed(source="../materials/images/hangman.png")] private static const HANGMAN:Class;
@@ -68,12 +69,16 @@ public class GameController {
 		hideGameWordPanel();
 		showStartBtn();
 		showEndTextField(win ? WIN_TEXT : LOSE_TEXT);
+		win ? _statistic.winsPlus() : _statistic.losesPlus();
 		SoundsManager.playSoundByName(win ? Sounds.WIN : Sounds.LOSE);
 	}
 
 	private function onStartBtnClick(event:MouseEvent):void {
 		if (_container.contains(_helpField)) {
 			_container.removeChild(_helpField);
+		}
+		if (!_container.contains(_statistic.view)) {
+			_container.addChild(_statistic.view);
 		}
 		startGame();
 	}
@@ -106,6 +111,7 @@ public class GameController {
 		createVirtualKeyboard();
 		createGameWordPanel();
 		createEndTextField();
+		createStatistic();
 	}
 
 	private function createBackgroundAndShow():void {
@@ -202,6 +208,12 @@ public class GameController {
 		if (_container.contains(_endTextField)) {
 			_container.removeChild(_endTextField);
 		}
+	}
+
+	private function createStatistic():void {
+		_statistic = new GameStatistic();
+		_statistic.view.x = Main.WIDTH/2 - _statistic.view.width/2;
+		_statistic.view.y = Main.HEIGHT - _statistic.view.height;
 	}
 
 }

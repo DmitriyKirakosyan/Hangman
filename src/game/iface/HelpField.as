@@ -11,6 +11,10 @@ import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
 
 public class HelpField extends Sprite {
+	private const HELP_TEXT:String = "После начала игры, выбирайте по одной букве из алфавита. Ваша цель - угадать слово.\n" +
+						"С каждой не правильной буквой на экране будет появляться элемент выселицы. Когда виселица целиком появится" +
+						"на экране - Вы проиграли. \n Если вы угадаете какую-то букву из слова, то эта буква будет открыта.";
+
 	public function HelpField() {
 		super();
 		init();
@@ -40,9 +44,7 @@ public class HelpField extends Sprite {
 		textField.selectable = false;
 		//textField.autoSize = TextFieldAutoSize.LEFT;
 		textField.wordWrap = true;
-		textField.htmlText = "После начала игры, выбирайте по одной букве из алфавита. Ваша цель - угадать слово.\n" +
-						"С каждой не правильной буквой на экране будет появляться элемент выселицы. Когда виселица целиком появится" +
-						"на экране - Вы проиграли. \n Если вы угадаете какую-то букву из слова, то эта буква будет открыта.";
+		textField.htmlText = HELP_TEXT;
 		addChild(textField);
 	}
 
