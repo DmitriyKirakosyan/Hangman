@@ -10,6 +10,10 @@ import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.filters.GlowFilter;
 
+import sound.Sounds;
+
+import sound.SoundsManager;
+
 public class VirtualKeyboard extends Sprite {
 	private const ROWS:int = 4;
 	private const COLUMNS:int = 8;
@@ -40,6 +44,7 @@ public class VirtualKeyboard extends Sprite {
 	private function onLetterClick(event:MouseEvent):void {
 		var letterItem:VirtualKeyboardItem = (event.target as VirtualKeyboardItem);
 		dispatchEvent(new VirtualKeyboardEvent(VirtualKeyboardEvent.PUSH_LETTER, letterItem.letter));
+		SoundsManager.playSoundByName(Sounds.CLICK);
 	}
 
 	private function onLetterMouseOver(event:MouseEvent):void {

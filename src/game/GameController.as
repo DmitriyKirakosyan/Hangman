@@ -25,6 +25,10 @@ import mx.controls.Text;
 
 import mx.skins.halo.HaloBorder;
 
+import sound.Sounds;
+
+import sound.SoundsManager;
+
 public class GameController {
 	private var _container:Sprite;
 	private var _gallows:Gallows;
@@ -32,9 +36,13 @@ public class GameController {
 	private var _helpField:HelpField;
 	private var _keyboard:VirtualKeyboard;
 	private var _gameWordController:GameWordController;
+	private var _endTextField:TextField;
 
 	[Embed(source="../materials/images/bg.jpg")] private static const BG:Class;
 	[Embed(source="../materials/images/hangman.png")] private static const HANGMAN:Class;
+
+	private const WIN_TEXT:String = "Вы отгадали слово! \n Поздравляем!";
+	private const LOSE_TEXT:String = "Вы проиграли. \n Попробуйте снова!";
 
 
 	public function GameController(container:Sprite) {
@@ -47,16 +55,20 @@ public class GameController {
 
 	private function startGame():void {
 		hideStartBtn();
+		hideEndTextField();
 		_gallows.setLevel(0);
 		showKeyboard();
 		_gameWordController.newWord();
 		showGameWordPanel();
+		SoundsManager.stopAllSounds();
 	}
 
 	private function endGame(win:Boolean):void {
 		hideKeyboard();
 		hideGameWordPanel();
 		showStartBtn();
+		showEndTextField(win ? WIN_TEXT : LOSE_TEXT);
+		SoundsManager.playSoundByName(win ? Sounds.WIN : Sounds.LOSE);
 	}
 
 	private function onStartBtnClick(event:MouseEvent):void {
@@ -93,6 +105,7 @@ public class GameController {
 		showStartBtn();
 		createVirtualKeyboard();
 		createGameWordPanel();
+		createEndTextField();
 	}
 
 	private function createBackgroundAndShow():void {
@@ -169,6 +182,25 @@ public class GameController {
 	private function hideGameWordPanel():void {
 		if (_container.contains(_gameWordController.view)) {
 			_container.removeChild(_gameWordController.view);
+		}
+	}
+
+	private function createEndTextField():void {
+		_endTextField = new TextField();
+		_endTextField.defaultTextFormat = new TextFormat( "Arial", 24,
+															0xffffff, true, null, null, "", "", TextFormatAlign.CENTER, 0, 0, 0, 0);
+		_endTextField.selectable = false;
+		_endTextField.autoSize = TextFieldAutoSize.LEFT;
+		_endTextField.x = 35;
+		_endTextField.y = 200;
+	}
+	private function showEndTextField(text:String):void {
+		_endTextField.text = text;
+		_container.addChild(_endTextField);
+	}
+	private function hideEndTextField():void {
+		if (_container.contains(_endTextField)) {
+			_container.removeChild(_endTextField);
 		}
 	}
 
