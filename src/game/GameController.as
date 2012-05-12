@@ -9,6 +9,8 @@ package game {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 
+import game.iface.VirtualKeyboard;
+
 import mx.skins.halo.HaloBorder;
 
 public class GameController {
@@ -16,6 +18,7 @@ public class GameController {
 	private var _gallows:Gallows;
 	private var _help:DisplayObject;
 	private var _startBtn:Sprite;
+	private var _keyboard:VirtualKeyboard;
 
 	[Embed(source="../materials/images/bg.jpg")] private static const BG:Class;
 	[Embed(source="../materials/images/hangman.png")] private static const HANGMAN:Class;
@@ -25,6 +28,7 @@ public class GameController {
 		super();
 		_container = container;
 		createBackground();
+		createVirtualKeyboard();
 		createStartBtn();
 		showHelp();
 		createObjects();
@@ -42,6 +46,11 @@ public class GameController {
 		hangman.x = 3;
 		hangman.y = Main.HEIGHT - hangman.height - 8;
 		_container.addChild(hangman);
+	}
+
+	private function createVirtualKeyboard():void {
+		_keyboard = new VirtualKeyboard();
+		_container.addChild(_keyboard);
 	}
 
 	private function showHelp():void {
