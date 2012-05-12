@@ -12,6 +12,7 @@ import flash.display.Sprite;
 public class Gallows extends Sprite{
 	private var _level:uint;
 	private var _sprites:Vector.<DisplayObject>;
+	private var _manSprite:DisplayObject;
 
 	[Embed(source="../materials/images/V1_new.png")] private static const V1:Class;
 	[Embed(source="../materials/images/V2_new.png")] private static const V2:Class;
@@ -19,6 +20,7 @@ public class Gallows extends Sprite{
 	[Embed(source="../materials/images/V4_new.png")] private static const V4:Class;
 	[Embed(source="../materials/images/V5_new.png")] private static const V5:Class;
 	[Embed(source="../materials/images/V6_new.png")] private static const V6:Class;
+	[Embed(source="../materials/images/man_new.png")] private static const MAN:Class;
 
 	private const IMG_CLASSES:Array = [V1, V2, V3, V4, V5, V6];
 
@@ -28,12 +30,20 @@ public class Gallows extends Sprite{
 		initSprites();
 	}
 
+	public function get maxLevel():Boolean { return _level >= _sprites.length; }
+
 	public function levelUp():void {
 		if (_level >= _sprites.length) { return; }
 
 		_level++;
 		addChild(_sprites[_level-1]);
+	}
 
+	public function showMan():void {
+		if (contains(_sprites[_sprites.length-1])) {
+			removeChild(_sprites[_sprites.length-1]);
+		}
+		addChild(_manSprite);
 	}
 
 	public function setLevel(value:uint):void {
@@ -49,9 +59,11 @@ public class Gallows extends Sprite{
 		for (var i:int = 0; i < _sprites.length; ++i) {
 			_sprites[i] = new IMG_CLASSES[i]();
 		}
+		_manSprite = new MAN();
 	}
 
 	private function updateImage():void {
+		if (contains(_manSprite)) { removeChild(_manSprite); }
 		for (var i:int = 0; i < _sprites.length; ++i) {
 			if (i < _level) {
 				if (!contains(_sprites[i])) {

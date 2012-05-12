@@ -15,6 +15,9 @@ import game.GameController;
 public class Main extends Sprite{
 	public static const WIDTH:int = 310;
 	public static const HEIGHT:int = 450;
+	public static const GAME_LOGO:String = "Игра ВИСЕЛИЦА";
+	public static const GAME_WORDS:Array = ["ОДИН", "ДВА", "ТРИ", "ДВАДЦАТЬ", "ЛОПАТА"];
+
 	public function Main() {
 		new GameController(this);
 	}

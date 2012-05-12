@@ -9,10 +9,17 @@ import flash.text.TextField;
 import flash.text.TextFormat;
 
 public class VirtualKeyboardItem extends Sprite {
+	private var _letter:String;
+
 	public function VirtualKeyboardItem(letter:String) {
 		super();
+		_letter = letter;
 		createBackground();
-		createLetter(letter);
+		createLetter();
+	}
+
+	public function get letter():String {
+		return _letter;
 	}
 
 	private function createBackground():void {
@@ -21,7 +28,7 @@ public class VirtualKeyboardItem extends Sprite {
 		graphics.endFill();
 	}
 
-	private function createLetter(letter:String):void {
+	private function createLetter():void {
 		var textFormat:TextFormat = new TextFormat( "Arial", 16,
 															0, true, null, null, "", "", "center", 0, 0, 0, 0);
 		var textField:TextField = new TextField();
@@ -30,7 +37,7 @@ public class VirtualKeyboardItem extends Sprite {
 		textField.defaultTextFormat = textFormat;
 		textField.selectable = false;
 		textField.mouseEnabled = false;
-		textField.text = letter;
+		textField.text = _letter;
 		addChild(textField);
 	}
 }
