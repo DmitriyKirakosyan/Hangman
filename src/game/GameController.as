@@ -41,6 +41,7 @@ public class GameController {
 
 	[Embed(source="../materials/images/bg.jpg")] private static const BG:Class;
 	[Embed(source="../materials/images/hangman.png")] private static const HANGMAN:Class;
+	[Embed(source="../materials/images/start.png")] private static const START:Class;
 
 	private const WIN_TEXT:String = "Вы отгадали слово! \n Поздравляем!";
 	private const LOSE_TEXT:String = "Вы проиграли. \n Попробуйте снова!";
@@ -66,7 +67,7 @@ public class GameController {
 
 	private function endGame(win:Boolean):void {
 		hideKeyboard();
-		hideGameWordPanel();
+		//hideGameWordPanel();
 		showStartBtn();
 		showEndTextField(win ? WIN_TEXT : LOSE_TEXT);
 		win ? _statistic.winsPlus() : _statistic.losesPlus();
@@ -158,10 +159,9 @@ public class GameController {
 
 	private function createStartBtn():void {
 		_startBtn = new Sprite();
-		_startBtn.graphics.beginFill(0xadffda);
-		_startBtn.graphics.drawRect(0, 0, 40, 30);
-		_startBtn.x = 250;
-		_startBtn.y = 350;
+		_startBtn.addChild(new START());
+		_startBtn.x = 100;
+		_startBtn.y = 310;
 		IfaceBtnWrapper.wrap(_startBtn);
 		_startBtn.addEventListener(MouseEvent.CLICK, onStartBtnClick);
 	}
@@ -179,7 +179,7 @@ public class GameController {
 
 	private function createGameWordPanel():void {
 		_gameWordController = new GameWordController();
-		_gameWordController.view.x = 10;
+		_gameWordController.view.x = 8;
 		_gameWordController.view.y = 50;
 	}
 	private function showGameWordPanel():void {

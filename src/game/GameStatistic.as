@@ -38,13 +38,13 @@ public class GameStatistic {
 	/* Internal functions */
 
 	private function init():void {
-		var tempTF:TextField = createTextField("побед: ");
+		var tempTF:TextField = createTextField("Выиграно: ");
 		view.addChild(tempTF);
 		_winTF = createTextField("0");
 		_winTF.x = tempTF.textWidth + 3;
 		view.addChild(_winTF);
-		tempTF = createTextField("/ поражений: ");
-		tempTF.x = _winTF.x + _winTF.textWidth + 13;
+		tempTF = createTextField("/ Проиграно: ");
+		tempTF.x = _winTF.x + _winTF.textWidth + 10;
 		view.addChild(tempTF);
 		_loseTF = createTextField("0");
 		_loseTF.x = tempTF.x + tempTF.textWidth + 3;
@@ -54,7 +54,7 @@ public class GameStatistic {
 	private function createTextField(text:String):TextField {
 		var textField:TextField = new TextField();
 		textField.selectable = false;
-		textField.defaultTextFormat = new TextFormat( "Arial", 16,
+		textField.defaultTextFormat = new TextFormat( "Arial", 12,
 															0xffffff, true, null, null, "", "", TextFormatAlign.LEFT, 0, 0, 0, 0);
 		textField.autoSize = TextFieldAutoSize.LEFT;
 		textField.text = text;

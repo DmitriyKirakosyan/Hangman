@@ -29,7 +29,7 @@ public class VirtualKeyboardItem extends Sprite {
 	}
 
 	private function createLetter():void {
-		var textFormat:TextFormat = new TextFormat( "Arial", 16,
+		var textFormat:TextFormat = new TextFormat( "Arial", 16, //Where is "Myriad Pro" font?
 															0, true, null, null, "", "", "center", 0, 0, 0, 0);
 		var textField:TextField = new TextField();
 		textField.width = width;

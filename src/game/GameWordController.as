@@ -58,8 +58,16 @@ public class GameWordController {
 		for (var i:int = 0; i < _currentWord.length; ++i) {
 			block = new GameLetterBlock(_currentWord.charAt(i));
 			_blocks.push(block);
-			block.x = i * (block.width + 5);
+			if (_currentWord.length > 10) {
+				block.scaleX = block.scaleY = 1 / (1 + (_currentWord.length-10)/6);
+			}
+			block.x = i * (block.width + 4);
 			_view.addChild(block);
+		}
+		if (_currentWord.length > 10) {
+			for each (var block:GameLetterBlock in _blocks) {
+				block.scaleX = block.scaleY = 1 / (1 + (_currentWord.length-10)/5);
+			}
 		}
 	}
 

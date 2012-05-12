@@ -35,7 +35,7 @@ public class GameLetterBlock extends Sprite {
 	private function init():void {
 		graphics.beginFill(0xffffff, .7);
 		graphics.lineStyle(1, 0xffffff);
-		graphics.drawRect(0, 0, 30, 30);
+		graphics.drawRect(0, 0, 25, 35);
 		graphics.endFill();
 		createTextField();
 	}
@@ -49,6 +49,7 @@ public class GameLetterBlock extends Sprite {
 		_textField.selectable = false;
 		//_textField.autoSize = TextFieldAutoSize.LEFT;
 		_textField.text = _letter;
+		_textField.y = height/2 - _textField.textHeight/2 - 2;
 	}
 }
 }

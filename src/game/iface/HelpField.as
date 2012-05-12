@@ -26,7 +26,7 @@ public class HelpField extends Sprite {
 	}
 
 	private function createBackground():void {
-		graphics.beginFill(0xffffff, .5);
+		graphics.beginFill(0xffffff, .7);
 		graphics.lineStyle(2, 0xffffff);
 		graphics.drawRoundRect(0, 0, 290, 190, 20, 20);
 		graphics.endFill();
